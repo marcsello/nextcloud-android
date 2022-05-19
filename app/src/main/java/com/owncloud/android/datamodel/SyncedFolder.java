@@ -40,6 +40,7 @@ public class SyncedFolder implements Serializable, Cloneable {
     private boolean chargingOnly;
     private boolean existing;
     private boolean subfolderByDate;
+    private boolean renameDuringUpload;
     private String account;
     private int uploadAction;
     private int nameCollisionPolicy;
@@ -71,6 +72,7 @@ public class SyncedFolder implements Serializable, Cloneable {
                         boolean chargingOnly,
                         boolean existing,
                         boolean subfolderByDate,
+                        boolean renameDuringUpload,
                         String account,
                         int uploadAction,
                         int nameCollisionPolicy,
@@ -85,6 +87,7 @@ public class SyncedFolder implements Serializable, Cloneable {
              chargingOnly,
              existing,
              subfolderByDate,
+             renameDuringUpload,
              account,
              uploadAction,
              nameCollisionPolicy,
@@ -106,6 +109,7 @@ public class SyncedFolder implements Serializable, Cloneable {
                            boolean chargingOnly,
                            boolean existing,
                            boolean subfolderByDate,
+                           boolean renameDuringUpload,
                            String account,
                            int uploadAction,
                            int nameCollisionPolicy,
@@ -120,6 +124,7 @@ public class SyncedFolder implements Serializable, Cloneable {
         this.chargingOnly = chargingOnly;
         this.existing = existing;
         this.subfolderByDate = subfolderByDate;
+        this.renameDuringUpload = renameDuringUpload;
         this.account = account;
         this.uploadAction = uploadAction;
         this.nameCollisionPolicy = nameCollisionPolicy;
@@ -170,6 +175,10 @@ public class SyncedFolder implements Serializable, Cloneable {
 
     public boolean isSubfolderByDate() {
         return this.subfolderByDate;
+    }
+
+    public boolean isRenameDuringUpload() {
+        return this.renameDuringUpload;
     }
 
     public String getAccount() {
@@ -230,6 +239,10 @@ public class SyncedFolder implements Serializable, Cloneable {
 
     public void setSubfolderByDate(boolean subfolderByDate) {
         this.subfolderByDate = subfolderByDate;
+    }
+
+    public void setRenameDuringUpload(boolean renameDuringUpload) {
+        this.renameDuringUpload = renameDuringUpload;
     }
 
     public void setAccount(String account) {

@@ -35,21 +35,22 @@ public class SyncedFolderDisplayItem extends SyncedFolder {
     /**
      * constructor for the display item specialization for a synced folder object.
      *
-     * @param id              id
-     * @param localPath       local path
-     * @param remotePath      remote path
-     * @param wifiOnly        upload on wifi only flag
-     * @param chargingOnly    upload on charging only
-     * @param existing        also upload existing
-     * @param subfolderByDate create sub-folders by date (month)
-     * @param account         the account owning the synced folder
-     * @param uploadAction    the action to be done after the upload
-     * @param enabled         flag if synced folder config is active
-     * @param filePaths       the UI info for the file path
-     * @param folderName      the UI info for the folder's name
-     * @param numberOfFiles   the UI info for number of files within the folder
-     * @param type            the type of the folder
-     * @param hidden          hide item flag
+     * @param id                 id
+     * @param localPath          local path
+     * @param remotePath         remote path
+     * @param wifiOnly           upload on wifi only flag
+     * @param chargingOnly       upload on charging only
+     * @param existing           also upload existing
+     * @param subfolderByDate    create sub-folders by date (month)
+     * @param renameDuringUpload rename files during upload
+     * @param account            the account owning the synced folder
+     * @param uploadAction       the action to be done after the upload
+     * @param enabled            flag if synced folder config is active
+     * @param filePaths          the UI info for the file path
+     * @param folderName         the UI info for the folder's name
+     * @param numberOfFiles      the UI info for number of files within the folder
+     * @param type               the type of the folder
+     * @param hidden             hide item flag
      */
     public SyncedFolderDisplayItem(long id,
                                    String localPath,
@@ -58,6 +59,7 @@ public class SyncedFolderDisplayItem extends SyncedFolder {
                                    boolean chargingOnly,
                                    boolean existing,
                                    boolean subfolderByDate,
+                                   boolean renameDuringUpload,
                                    String account,
                                    int uploadAction,
                                    int nameCollisionPolicy,
@@ -75,6 +77,7 @@ public class SyncedFolderDisplayItem extends SyncedFolder {
               chargingOnly,
               existing,
               subfolderByDate,
+              renameDuringUpload,
               account,
               uploadAction,
               nameCollisionPolicy,
@@ -94,6 +97,7 @@ public class SyncedFolderDisplayItem extends SyncedFolder {
                                    boolean chargingOnly,
                                    boolean existing,
                                    boolean subfolderByDate,
+                                   boolean renameDuringUpload,
                                    String account,
                                    int uploadAction,
                                    int nameCollisionPolicy,
@@ -109,6 +113,7 @@ public class SyncedFolderDisplayItem extends SyncedFolder {
               chargingOnly,
               existing,
               subfolderByDate,
+              renameDuringUpload,
               account,
               uploadAction,
               nameCollisionPolicy,

@@ -881,6 +881,7 @@ public class FileContentProvider extends ContentProvider {
                        + ProviderTableMeta.SYNCED_FOLDER_ENABLED + " INTEGER, "           // enabled
                        + ProviderTableMeta.SYNCED_FOLDER_ENABLED_TIMESTAMP_MS + " INTEGER, " // enable date
                        + ProviderTableMeta.SYNCED_FOLDER_SUBFOLDER_BY_DATE + " INTEGER, " // subfolder by date
+                       + ProviderTableMeta.SYNCED_FOLDER_RENAME_DURING_UPLOAD + " INTEGER, " // rename during upload
                        + ProviderTableMeta.SYNCED_FOLDER_ACCOUNT + "  TEXT, "             // account
                        + ProviderTableMeta.SYNCED_FOLDER_UPLOAD_ACTION + " INTEGER, "     // upload action
                        + ProviderTableMeta.SYNCED_FOLDER_NAME_COLLISION_POLICY + " INTEGER, " // name collision policy
@@ -2491,6 +2492,19 @@ public class FileContentProvider extends ContentProvider {
                     db.execSQL("UPDATE " + ProviderTableMeta.FILE_TABLE_NAME + " SET " + ProviderTableMeta.FILE_ETAG + " = '' WHERE 1=1");
 
                     db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+            }
+
+            if (oldVersion < 64 && newVersion >= 64) {
+                Log_OC.i(SQL, "Adding 'rename during upload' column");
+                db.beginTransaction();
+                try {
+                    db.execSQL(ALTER_TABLE + ProviderTableMeta.SYNCED_FOLDERS_TABLE_NAME +
+                                   ADD_COLUMN + ProviderTableMeta.SYNCED_FOLDER_RENAME_DURING_UPLOAD + " INTEGER ");
+                    db.setTransactionSuccessful();
+                    upgraded = true;
                 } finally {
                     db.endTransaction();
                 }
