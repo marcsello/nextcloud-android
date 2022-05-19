@@ -92,6 +92,7 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
     private AppCompatCheckBox mUploadOnChargingCheckbox;
     private AppCompatCheckBox mUploadExistingCheckbox;
     private AppCompatCheckBox mUploadUseSubfoldersCheckbox;
+    private AppCompatCheckBox mUploadRenameDuringUpload;
     private TextView mUploadBehaviorSummary;
     private TextView mNameCollisionPolicySummary;
     private TextView mLocalFolderPath;
@@ -202,11 +203,15 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
         mUploadUseSubfoldersCheckbox = view.findViewById(
                 R.id.setting_instant_upload_path_use_subfolders_checkbox);
 
+        mUploadRenameDuringUpload = view.findViewById(
+                R.id.setting_instant_upload_rename_during_upload_checkbox);
+
         themeCheckableUtils.tintCheckbox(accentColor,
                                          mUploadOnWifiCheckbox,
                                          mUploadOnChargingCheckbox,
                                          mUploadExistingCheckbox,
-                                         mUploadUseSubfoldersCheckbox);
+                                         mUploadUseSubfoldersCheckbox,
+                                         mUploadRenameDuringUpload);
 
         mUploadBehaviorSummary = view.findViewById(R.id.setting_instant_behaviour_summary);
 
@@ -247,6 +252,7 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
 
         mUploadExistingCheckbox.setChecked(mSyncedFolder.isExisting());
         mUploadUseSubfoldersCheckbox.setChecked(mSyncedFolder.isSubfolderByDate());
+        mUploadRenameDuringUpload.setChecked(mSyncedFolder.isRenameDuringUpload());
 
         mUploadBehaviorSummary.setText(mUploadBehaviorItemStrings[mSyncedFolder.getUploadActionInteger()]);
 
@@ -351,6 +357,9 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
         view.findViewById(R.id.setting_instant_upload_path_use_subfolders_container).setEnabled(enable);
         view.findViewById(R.id.setting_instant_upload_path_use_subfolders_container).setAlpha(alpha);
 
+        view.findViewById(R.id.setting_instant_upload_rename_during_upload_container).setEnabled(enable);
+        view.findViewById(R.id.setting_instant_upload_rename_during_upload_container).setAlpha(alpha);
+
         view.findViewById(R.id.remote_folder_container).setEnabled(enable);
         view.findViewById(R.id.remote_folder_container).setAlpha(alpha);
 
@@ -365,13 +374,15 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
                                              mUploadOnWifiCheckbox,
                                              mUploadOnChargingCheckbox,
                                              mUploadExistingCheckbox,
-                                             mUploadUseSubfoldersCheckbox);
+                                             mUploadUseSubfoldersCheckbox,
+                                             mUploadRenameDuringUpload);
         } else {
             themeCheckableUtils.tintCheckbox(Color.GRAY,
                                              mUploadOnWifiCheckbox,
                                              mUploadOnChargingCheckbox,
                                              mUploadExistingCheckbox,
-                                             mUploadUseSubfoldersCheckbox);
+                                             mUploadUseSubfoldersCheckbox,
+                                             mUploadRenameDuringUpload);
         }
 
         checkWritableFolder();
@@ -420,6 +431,15 @@ public class SyncedFolderPreferencesDialogFragment extends DialogFragment implem
                     public void onClick(View v) {
                         mSyncedFolder.setSubfolderByDate(!mSyncedFolder.isSubfolderByDate());
                         mUploadUseSubfoldersCheckbox.toggle();
+                    }
+                });
+
+        view.findViewById(R.id.setting_instant_upload_rename_during_upload_container).setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSyncedFolder.setRenameDuringUpload(!mSyncedFolder.isRenameDuringUpload());
+                        mUploadRenameDuringUpload.toggle();
                     }
                 });
 

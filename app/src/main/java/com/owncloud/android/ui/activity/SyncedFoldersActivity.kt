@@ -671,6 +671,7 @@ class SyncedFoldersActivity :
                 syncedFolder.isChargingOnly,
                 syncedFolder.isExisting,
                 syncedFolder.isSubfolderByDate,
+                syncedFolder.isRenameDuringUpload,
                 syncedFolder.uploadAction,
                 syncedFolder.nameCollisionPolicy.serialize(),
                 syncedFolder.isEnabled
@@ -736,6 +737,7 @@ class SyncedFoldersActivity :
      * @param chargingOnly    upload on charging only
      * @param existing        also upload existing
      * @param subfolderByDate created sub folders
+     * @param renameDuringUpload rename files during upload
      * @param uploadAction    upload action
      * @param nameCollisionPolicy what to do on name collision
      * @param enabled         is sync enabled
@@ -750,6 +752,7 @@ class SyncedFoldersActivity :
         chargingOnly: Boolean,
         existing: Boolean,
         subfolderByDate: Boolean,
+        renameDuringUpload: Boolean,
         uploadAction: Int,
         nameCollisionPolicy: Int,
         enabled: Boolean
@@ -761,6 +764,7 @@ class SyncedFoldersActivity :
         item.isChargingOnly = chargingOnly
         item.isExisting = existing
         item.isSubfolderByDate = subfolderByDate
+        item.isRenameDuringUpload = renameDuringUpload
         item.uploadAction = uploadAction
         item.setNameCollisionPolicy(nameCollisionPolicy)
         item.setEnabled(enabled, clock.currentTime)
